@@ -1,58 +1,63 @@
-let display = document.getElementById("display");
-
-// Button click input
-function append(value) {
-    display.value += value;
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #141e30, #243b55);
+  font-family: Arial, sans-serif;
 }
 
-function clearDisplay() {
-    display.value = "";
+.calculator {
+  background: #1e1e2f;
+  padding: 20px;
+  border-radius: 20px;
+  width: 320px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-function deleteLast() {
-    display.value = display.value.slice(0, -1);
+#display {
+  width: 100%;
+  height: 60px;
+  font-size: 24px;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 15px;
+  text-align: right;
+  background: #0d0d1a;
+  color: #fff;
 }
 
-function calculate() {
-    try {
-        display.value = eval(display.value);
-    } catch {
-        display.value = "Error";
-    }
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
 }
 
-// 🔥 KEYBOARD SUPPORT
-document.addEventListener("keydown", function(event) {
-    let key = event.key;
+button {
+  height: 60px;
+  font-size: 18px;
+  border: none;
+  border-radius: 12px;
+  background: #2f2f4f;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
 
-    // Numbers
-    if (!isNaN(key)) {
-        display.value += key;
-    }
+button:hover {
+  background: #44446a;
+}
 
-    // Operators
-    if (key === "+" || key === "-" || key === "*" || key === "/") {
-        display.value += key;
-    }
+.equal {
+  background: #00c853;
+}
 
-    // Decimal
-    if (key === ".") {
-        display.value += ".";
-    }
+.equal:hover {
+  background: #00e676;
+}
 
-    // Enter = Calculate
-    if (key === "Enter") {
-        event.preventDefault();
-        calculate();
-    }
-
-    // Backspace = Delete
-    if (key === "Backspace") {
-        deleteLast();
-    }
-
-    // Escape = Clear
-    if (key === "Escape") {
-        clearDisplay();
-    }
-});
+.zero {
+  grid-column: span 2;
+}
